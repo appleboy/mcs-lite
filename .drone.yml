@@ -1,6 +1,5 @@
 
 pipeline:
-
   restore-cache:
     image: drillster/drone-volume-cache
     restore: true
