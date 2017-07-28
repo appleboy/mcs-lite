@@ -1,0 +1,29 @@
+
+pipeline:
+  install:
+    image: node:8.2.1
+    commands:
+      - node --version
+      - npm --version
+      - yarn --version
+      - yarn config set cache-folder .yarn-cache
+      - yarn install --pure-lockfile
+      - yarn cache dir
+
+  lint:
+    image: node:8.2.1
+    group: frontend
+    commands:
+      - ./tasks/lint.sh
+
+  test:
+    image: node:8.2.1
+    group: frontend
+    commands:
+      - ./tasks/test.sh
+
+  test-page:
+    image: node:8.2.1
+    group: frontend
+    commands:
+      - ./tasks/test-page.sh
