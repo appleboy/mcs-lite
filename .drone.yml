@@ -1,5 +1,15 @@
 
 pipeline:
+
+  restore-cache:
+    image: drillster/drone-volume-cache
+    restore: true
+    mount:
+      - node_modules
+      - .yarn-cache
+    volumes:
+      - /home/cache:/cache
+
   install:
     image: node:8.2.1
     commands:
@@ -27,3 +37,12 @@ pipeline:
     group: frontend
     commands:
       - ./tasks/test-page.sh
+
+  rebuild-cache:
+    image: drillster/drone-volume-cache
+    rebuild: true
+    mount:
+      - node_modules
+      - .yarn-cache
+    volumes:
+      - /home/cache:/cache
